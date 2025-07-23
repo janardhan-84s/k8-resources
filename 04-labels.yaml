@@ -1,0 +1,14 @@
+# The code is used for labels 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: labels
+  labels:
+    project: roboshop
+    component: mysql
+    tier: backend
+    environment: dev
+spec:
+  containers:
+  - name: nginx
+    image: nginx
