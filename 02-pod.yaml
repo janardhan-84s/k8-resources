@@ -1,4 +1,4 @@
-
+# this code is for creating  a pod with single container
 apiVersion: v1
 kind: Pod
 metadata:

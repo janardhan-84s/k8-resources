@@ -1,0 +1,16 @@
+# This code is for inside a POD we are having multi containers
+apiVersion: v1           #
+kind: Pod                #
+metadata:                #  GENERAL SKELETON SYNTAX  FOR K8
+  name: multi-container  #
+  labels:                #
+    project: roboshop
+    purpose: multi-container-demo
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  - name: almalinux
+    image: almalinux:9
+    command: ["sleep", "1000"] # command giving for container for non stoply running
+
