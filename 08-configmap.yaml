@@ -1,0 +1,16 @@
+# This code is for creating config map outside of POD. 
+# Because we don't want to disturb the main code. If we change we again rebuild the image
+# and push it into Docker hub.
+# To overcome the problem we can create "configmap" 
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pod-config
+  labels:
+    purpose: config
+    env: dev
+data:
+  COURSE: "Janardhan institute"
+  DURATION: "120HRS"
+  TRAINER: "jana"

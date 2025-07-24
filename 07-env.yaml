@@ -1,4 +1,5 @@
-# This code is for environmental variables
+# This code is for environmental variables and this is the main code we dont want to 
+# change any specifications in this code
 apiVersion: v1
 kind: Pod
 metadata:
@@ -13,7 +14,8 @@ spec:
     - name: COURSE
       value: "KUBERENETS"
     - name: TRAINER
-      value: "SIVAKUMAR REDDY M"
+      value: "JANARDHAN"
 
 
 # we can check the env variables while running PODS, you can see the env variables
+# kubectl exec -it resource name which we create --bash

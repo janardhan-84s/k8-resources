@@ -1,0 +1,12 @@
+# After creation of "config map" we need to attach the POD like below
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-configmap
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      envFrom:
+        - configMapRef:
+            name: pod-config
