@@ -28,3 +28,6 @@ spec:
         image: nginx:latest
         #image: nginx:stable-per1
 
+# Repliacset is subset of Deployment
+# POD is subset of replica
+
