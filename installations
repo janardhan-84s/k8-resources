@@ -1,0 +1,12 @@
+we are doing these installations in server
+
+1. For installing kubens
+
+  git clone https://github.com/ahmetb/kubectx /opt/kubectx
+  sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+
+2. For installing k9s
+
+  curl -sS https://webinstall.dev/k9s | bash
+
+  
