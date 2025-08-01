@@ -1,4 +1,6 @@
 # This code is for EBS Dynamic provisioning that create the disk and PV automatically
+
+# creating the PVC 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -11,7 +13,8 @@ spec:
     requests:
       storage: 4Gi
 ---
-# After done with PVC we need to attach with POD
+# After done with PVC we need to attach with POD and create the volume for it
+# And mount with the volume to ESB dynamic 
 apiVersion: v1
 kind: Pod
 metadata:

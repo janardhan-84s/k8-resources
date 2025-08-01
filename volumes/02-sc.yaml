@@ -1,4 +1,5 @@
-# This code is for storage class 
+# This code is for storage class. It will create the disk automatically
+# This is the one time code 
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -6,3 +7,7 @@ metadata:
 reclaimPolicy: Retain
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer # disk will be created when pod is getting created
+
+
+
+# after running this code only then we go for dynamic 

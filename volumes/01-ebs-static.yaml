@@ -7,15 +7,15 @@ metadata:
   name: ebs-static
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteOnce # Giving read and write access 
   capacity:
     storage: 20Gi
-  csi:
+  csi:              # Installing drivers
     driver: ebs.csi.aws.com
     fsType: ext4
     volumeHandle: vol-072a8f44214a23f64
 ---
-# Creating a PVC resource it refers they want storage
+# Creating a PVC resource it refers they want to claim storage
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -30,6 +30,7 @@ spec:
       storage: 15Gi
 ---
 # creating a POD because we need to attach with PVC after creation of PVC
+# Inside POD we are creating a container and we can create a volume and mount it in storage
 apiVersion: v1
 kind: Pod
 metadata:
@@ -38,8 +39,12 @@ metadata:
     purpose: ebs-static-demo
     project: roboshop
 spec:
+  # we can create labels to the nodes. using those labels as node selectors inside POD
+  # then it will go to the "us-east-1c".we can get this label from below command
+  # kubectl get nodes --show-labels
+  # After the command it will display the data the last one is "" topology.kubernetes.io/zone: us-east-1c"
   nodeSelector:
-    topology.kubernetes.io/zone: us-east-1c
+    topology.kubernetes.io/zone: us-east-1c # we can mention our required zone
   containers:
   - name: nginx
     image: nginx
@@ -70,3 +75,17 @@ spec:
       port: 80 # service port
       targetPort: 80 # container port
 
+
+# After run this code checking DNS it will display "403" forbidden error.
+# because it doesn't have any data inside the EBS disk.
+# So we will create data inside disk
+# --> kubectl exec -it nginx --bash
+# --> cd /usr/share/nginx/html/
+# --> echo "<h1> Hi this is janardhan</h1>" >index.html
+# ---> exit
+# then it will display the data.
+# you can delete the pod
+#   kubectl delete pod <pod-name>
+# still the content is displaying and it is store in the EBS disk
+# Again you can create the POD it will taking the EBS disk and it is in-use while 
+# you check the EBS Volumes in AWS console
