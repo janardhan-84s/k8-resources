@@ -1,3 +1,6 @@
+# This code is for Elastic file provisioning 
+
+# Creating the PV
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -12,8 +15,9 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: fs-0bce55c2a5841e18c
+    volumeHandle: fs-0bce55c2a5841e18c # give our created volume in EFS
 ---
+# Creating the PVC
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -26,6 +30,8 @@ spec:
     requests:
       storage: 5Gi
 ---
+# Creating the POD, Inside POD we are creating a container and creating the volume and 
+# that volume is mounted for EFS Drive
 apiVersion: v1
 kind: Pod
 metadata:
@@ -45,6 +51,7 @@ spec:
     persistentVolumeClaim:
       claimName: efs-static
 ---
+# Creating Load balancer service we are accessing it from extrenal site in internet
 apiVersion: v1
 kind: Service
 metadata:
@@ -62,4 +69,3 @@ spec:
       port: 80 # service port
       targetPort: 80 # container port
 
-      

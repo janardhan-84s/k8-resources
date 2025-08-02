@@ -1,4 +1,5 @@
-
+# This code is for EFS Dynamic provisioning
+# Creation of PVC
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
